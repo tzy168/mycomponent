@@ -4,7 +4,7 @@ import SideBar from "./test_component/sideBar";
 import ReSizeBox from "./test_component/ReSizeBox";
 import MyChart from "./Charts/index";
 import ResizeableContainer from "./test_component/ReSizeDiv";
-import { Resizable } from "re-resizable";
+// import { Resizable } from "re-resizable";
 
 const App: React.FC = () => {
   const [chartType, setCharttype] = useState<string>("pie");
@@ -44,13 +44,7 @@ const App: React.FC = () => {
         {/* 图表 */}
         {/* <div className="charts"></div> */}
         {/* ResizeDiv */}{" "}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-          }}
-        >
+        <div style={{ display: "flex" }}>
           <ResizeableContainer>
             <MyChart type={chartType} />
           </ResizeableContainer>{" "}

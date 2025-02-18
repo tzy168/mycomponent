@@ -30,7 +30,7 @@ const MyPieChart = (props: any) => {
             trigger: "item",
           },
           legend: {
-            top: "5%",
+            top: "0%",
             left: "center",
           },
           grid: {
@@ -40,7 +40,7 @@ const MyPieChart = (props: any) => {
             {
               name: "Access From",
               type: "pie",
-              radius: ["50%", "70%"],
+              radius: ["0%", "60%"],
               avoidLabelOverlap: false,
               itemStyle: {
                 borderRadius: 10,
@@ -98,11 +98,7 @@ const MyPieChart = (props: any) => {
     }
   }, []);
 
-  return (
-    
-      <div ref={chartRef} style={{ width: "100%", height: "100%" }}></div>
-
-  );
+  return <div ref={chartRef} style={{ width: "100%", height: "100%" }}></div>;
 };
 
 export default MyPieChart;

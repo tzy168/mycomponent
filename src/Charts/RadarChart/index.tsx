@@ -27,9 +27,9 @@ const MyRadarChart = (props: any) => {
           alignTicks: false,
           grid: {
             containLabel: true,
-            top: "10%",
+            top: "0%",
             left: "10%",
-            right: "10%",
+            right: "20%",
             bottom: "10%",
           },
           radar: {

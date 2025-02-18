@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
 
-const MIN_WIDTH = 200;
-const MIN_HEIGHT = 200;
+const MIN_WIDTH = 300;
+const MIN_HEIGHT = 300;
 const MAX_WIDTH = 600; // 最大宽度
 const MAX_HEIGHT = 600; // 最大高度
 
@@ -22,6 +22,8 @@ export default function ResizeableContainer(props: any) {
     if (!container) return;
 
     const handleMouseDown = (e: MouseEvent) => {
+      // console.log(e);
+
       // 仅在点击右下角缩放手柄时启动拖拽
       if (
         e.target instanceof HTMLElement &&
@@ -51,7 +53,7 @@ export default function ResizeableContainer(props: any) {
 
       // 更新容器的宽高
       const newWidth = Math.max(width + diffX, MIN_WIDTH);
-      const newHeight = Math.max(height + diffY, MIN_WIDTH);
+      const newHeight = Math.max(height + diffY, MIN_HEIGHT);
 
       // 限制最小宽度和最小高度
       setWidth(Math.min(newWidth, MAX_WIDTH)); // 限制最大宽度
@@ -70,14 +72,14 @@ export default function ResizeableContainer(props: any) {
       }
     };
 
-    // 绑定事件监听
-    document.addEventListener("mousedown", handleMouseDown);
+    // 绑定事件监听，仅限于当前容器
+    container?.addEventListener("mousedown", handleMouseDown);
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
 
     // 清理事件监听
     return () => {
-      document.removeEventListener("mousedown", handleMouseDown);
+      container?.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
@@ -86,12 +88,23 @@ export default function ResizeableContainer(props: any) {
   return (
     <div
       className="parent"
-      style={{ width: `${width}px`, height: `${height}px` }}
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        position: "relative",
+      }}
     >
       <div
         ref={containerRef}
         className="container"
-        style={{ width: "95%", height: "95%" }}
+        style={{
+          width: "95%",
+          height: "95%",
+          position: "absolute", // 使用绝对定位
+          top: 0,
+          left: 0,
+          transformOrigin: "0 0", // 设置锚点为左上角
+        }}
       >
         {children}
         <div ref={handleRef} className="resize-handle" />
